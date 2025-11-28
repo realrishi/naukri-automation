@@ -14,10 +14,9 @@ async function runOnce() {
 
   try {
     console.log("Opening login page...");
-    await page.goto("https://www.naukri.com/nlogin/login", {
-      timeout: 60000,
-      ignoreHTTPSErrors: true
-    });
+    await page.goto('https://www.naukri.com/nlogin/login', { waitUntil: 'domcontentloaded' });
+    await page.screenshot({ path: 'login_page.png', fullPage: true });
+    
 
     await page.fill("#usernameField", EMAIL);
     await page.screenshot({ path: "debug.png", fullPage: true });
