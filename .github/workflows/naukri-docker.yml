@@ -1,22 +1,28 @@
 name: Naukri Automation (Docker)
 
+# Run every hour, plus manual trigger
 on:
   schedule:
-    - cron: "0 * * * *" # Every hour
-  workflow_dispatch:     # Manual trigger
+    - cron: "0 * * * *"   # Every hour
+  workflow_dispatch:       # Allows manual trigger
 
 jobs:
   automate:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout your repo
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      # Step 2: Build the Docker image
       - name: Build Docker image
         run: docker build -t naukri-automation .
 
+      # Step 3: Run Docker container with secrets
       - name: Run Docker container
-        run: docker run --rm \
-             -e EMAIL=${{ secrets.EMAIL }} \
-             -e PASSWORD=${{ secrets.PASSWORD }} \
-             naukri-automation
+        run: |
+          docker run --rm \
+            -e EMAIL=${{ secrets.EMAIL }} \
+            -e PASSWORD=${{ secrets.PASSWORD }} \
+            naukri-automation
