@@ -1,12 +1,12 @@
 const express = require("express");
 const { chromium } = require("playwright");
 
-const EMAIL = process.env.EMAIL;
-const PASSWORD = process.env.PASSWORD;
+const EMAIL = "rishiraj.pal.work@gmail.com";
+const PASSWORD = "Rishi@276";
 
 async function runOnce() {
   const browser = await chromium.launch({
-    headless: true,
+    headless: false,
     args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
   const context = await browser.newContext();
@@ -20,6 +20,7 @@ async function runOnce() {
     });
 
     await page.fill("#usernameField", EMAIL);
+    await page.screenshot({ path: "debug.png", fullPage: true });
     await page.fill("#passwordField", PASSWORD);
 
     await Promise.all([
@@ -129,7 +130,7 @@ if (process.env.DISABLE_SERVER === "true") {
 } else {
   // Start Express server normally
   const app = express();
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 4000;
 
   app.get("/", (_req, res) => res.send("OK"));
 
