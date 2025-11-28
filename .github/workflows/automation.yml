@@ -1,9 +1,10 @@
 name: Naukri Automation
 
+# Run every hour + manual trigger
 on:
   schedule:
-    - cron: "0 * * * *"
-  workflow_dispatch:
+    - cron: "0 * * * *"   # Runs at minute 0 of every hour
+  workflow_dispatch:       # Allows manual trigger
 
 jobs:
   automate:
@@ -22,10 +23,13 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Install Playwright browsers
-        run: npx playwright install
+      - name: Setup Playwright
+        uses: microsoft/playwright-github-action@v1
+        with:
+          # Install only Chromium (your script uses Chromium)
+          browsers: chromium
 
       - name: Run Naukri automation
         run: node index.js

@@ -7,7 +7,7 @@ const PASSWORD = process.env.PASSWORD;
 async function runOnce() {
   const browser = await chromium.launch({
     headless: false,
-    args: ["--ignore-certificate-errors"]
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
   const context = await browser.newContext();
   const page = await context.newPage();
