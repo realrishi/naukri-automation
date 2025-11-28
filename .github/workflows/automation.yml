@@ -32,3 +32,10 @@ jobs:
 
       - name: Run Naukri automation
         run: node index.js
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshots
+          path: "*.png"
