@@ -1,6 +1,5 @@
-# Base image with Node 20
-FROM mcr.microsoft.com/playwright:focal
-
+# Update to the latest Playwright image that matches your package version
+FROM mcr.microsoft.com/playwright:v1.57.0-focal
 # Set working directory
 WORKDIR /usr/src/app
 
