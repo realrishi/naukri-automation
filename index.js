@@ -1,8 +1,8 @@
 const express = require("express");
 const { chromium } = require("playwright");
 
-const EMAIL = "rishiraj.pal.work@gmail.com";
-const PASSWORD = "Rishi@276";
+const EMAIL = process.env.EMAIL;
+const PASSWORD = process.env.PASSWORD;
 
 async function runOnce() {
   const browser = await chromium.launch({
